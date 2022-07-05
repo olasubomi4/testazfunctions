@@ -21,11 +21,9 @@ namespace sqlfunction
         {
             log.LogInformation("Get data from the database");
             List<Category> _catefory_lst = new List<Category>();
-<<<<<<< HEAD:sqlfunction/GetCategory.cs
-            string _statement = "SELECT Id,Name,DisplayOrder,CreatedDateTime [dbo].[categories]";
-=======
+
             string _statement = "SELECT Id,Name,DisplayOrder,CreatedDateTime from categories";
->>>>>>> 7f74f4f (.):sqlfunction/GetProduct.cs
+
             SqlConnection _connection = GetConnection();
 
             _connection.Open();
@@ -67,11 +65,10 @@ namespace sqlfunction
             
             int CategoryID = int.Parse(req.Query["Id"]);
 
-<<<<<<< HEAD:sqlfunction/GetCategory.cs
-            string _statement = String.Format("SELECT Id,Name,DisplayOrder,CreatedDateTime [dbo].[categories] WHERE ProductID={0}", CategoryID);
-=======
+
+
             string _statement = String.Format("SELECT Id,Name,DisplayOrder,CreatedDateTime from categories WHERE ProductID={0}", CategoryID);
->>>>>>> 7f74f4f (.):sqlfunction/GetProduct.cs
+
             SqlConnection _connection = GetConnection();
 
             _connection.Open();

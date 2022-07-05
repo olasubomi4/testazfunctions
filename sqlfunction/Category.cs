@@ -10,20 +10,14 @@ namespace sqlfunction
 {
     public class Category
     {
-<<<<<<< HEAD
-        [Key]
-        public int Id { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [DisplayName("Display Order")]
-        [Range(1, 100, ErrorMessage = "Display Order must be between 1 and 100 only!!")]
-=======
+
+ 
      
         public int Id { get; set; }
  
         public string Name { get; set; }
    
->>>>>>> 7f74f4f (.)
+
         public int DisplayOrder { get; set; }
         public DateTime CreatedDateTime { get; set; } = DateTime.Now;
     }
