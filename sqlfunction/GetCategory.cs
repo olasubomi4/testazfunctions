@@ -12,16 +12,20 @@ using System.Collections.Generic;
 
 namespace sqlfunction
 {
-    public static class GetProduct
+    public static class GetCategory
     {
-        [FunctionName("GetProducts")]
+        [FunctionName("GetCategories")]
         public static async Task<IActionResult> RunProducts(
             [HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("Get data from the database");
-            List<Product> _product_lst = new List<Product>();
-            string _statement = "SELECT ProductID,ProductName,Quantity from Products";
+            List<Category> _catefory_lst = new List<Category>();
+<<<<<<< HEAD:sqlfunction/GetCategory.cs
+            string _statement = "SELECT Id,Name,DisplayOrder,CreatedDateTime [dbo].[categories]";
+=======
+            string _statement = "SELECT Id,Name,DisplayOrder,CreatedDateTime from categories";
+>>>>>>> 7f74f4f (.):sqlfunction/GetProduct.cs
             SqlConnection _connection = GetConnection();
 
             _connection.Open();
@@ -32,19 +36,20 @@ namespace sqlfunction
             {
                 while (_reader.Read())
                 {
-                    Product _product = new Product()
+                     Category _category = new Category()
                     {
-                        ProductID = _reader.GetInt32(0),
-                        ProductName = _reader.GetString(1),
-                        Quantity = _reader.GetInt32(2)
+                        Id = _reader.GetInt32(0),
+                        Name = _reader.GetString(1),
+                        DisplayOrder = _reader.GetInt32(2),
+                        CreatedDateTime = _reader.GetDateTime(3)
                     };
 
-                    _product_lst.Add(_product);
+                    _catefory_lst.Add(_category);
                 }
             }
             _connection.Close();            
 
-            return new OkObjectResult(_product_lst);
+            return new OkObjectResult(_catefory_lst);
         }
 
         private static SqlConnection GetConnection()
@@ -53,32 +58,38 @@ namespace sqlfunction
             return new SqlConnection(connectionString);
         }
 
-        [FunctionName("GetProduct")]
+        [FunctionName("GetCategory")]
         public static async Task<IActionResult> RunProduct(
             [HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequest req,
             ILogger log)
         {
 
             
-            int ProductID = int.Parse(req.Query["Id"]);
+            int CategoryID = int.Parse(req.Query["Id"]);
 
-            string _statement = String.Format("SELECT ProductID,ProductName,Quantity from Products WHERE ProductID={0}",ProductID);
+<<<<<<< HEAD:sqlfunction/GetCategory.cs
+            string _statement = String.Format("SELECT Id,Name,DisplayOrder,CreatedDateTime [dbo].[categories] WHERE ProductID={0}", CategoryID);
+=======
+            string _statement = String.Format("SELECT Id,Name,DisplayOrder,CreatedDateTime from categories WHERE ProductID={0}", CategoryID);
+>>>>>>> 7f74f4f (.):sqlfunction/GetProduct.cs
             SqlConnection _connection = GetConnection();
 
             _connection.Open();
 
             SqlCommand _sqlcommand = new SqlCommand(_statement, _connection);
-            Product _product = new Product();
+            Category _category = new Category();
 
             try
             {
                 using (SqlDataReader _reader = _sqlcommand.ExecuteReader())
                 {
-                    _reader.Read();                    
-                    _product.ProductID = _reader.GetInt32(0);
-                    _product.ProductName = _reader.GetString(1);
-                    _product.Quantity = _reader.GetInt32(2);
-                    var response = _product;
+                    _reader.Read();
+                    _category.Id = _reader.GetInt32(0);
+                    _category.Name = _reader.GetString(1);
+                    _category.DisplayOrder = _reader.GetInt32(2);
+                    _category.CreatedDateTime = _reader.GetDateTime(3);
+
+                    var response = _category;
                     return new OkObjectResult(response);
                 }
             }

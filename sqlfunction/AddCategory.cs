@@ -12,27 +12,28 @@ using System.Data;
 
 namespace sqlfunction
 {
-    public static class AddProduct
+    public static class AddCategory
     {
-        [FunctionName("AddProduct")]
+        [FunctionName("AddCategory")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
             ILogger log)
         {
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            Product data = JsonConvert.DeserializeObject<Product>(requestBody);
+            Category data = JsonConvert.DeserializeObject<Category>(requestBody);
 
             SqlConnection connection = GetConnection();
 
             connection.Open();
 
-            string statement = "INSERT INTO Products(ProductName,Quantity) VALUES(@param2,@param3)";
+            string statement = "INSERT INTO categories(Name,DisplayOrder,CreatedDateTime) VALUES(@param2,@param3,@param4)";
 
             using (SqlCommand command = new SqlCommand(statement, connection))
             {
                 //command.Parameters.Add("@param1", SqlDbType.Int).Value = data.ProductID;
-                command.Parameters.Add("@param2", SqlDbType.VarChar, 1000).Value = data.ProductName;
-                command.Parameters.Add("@param3", SqlDbType.Int).Value = data.Quantity;
+                command.Parameters.Add("@param2", SqlDbType.VarChar, 1000).Value = data.Name;
+                command.Parameters.Add("@param3", SqlDbType.Int).Value = data.DisplayOrder;
+                command.Parameters.Add("@param4", SqlDbType.DateTime2).Value = data.CreatedDateTime;
                 command.CommandType = CommandType.Text;
                 command.ExecuteNonQuery();
 

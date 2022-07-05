@@ -1,15 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace sqlfunction
 {
-    internal class Product
+    public class Category
     {
-        public int ProductID { get; set; }
-        public string ProductName { get; set; }
-        public int Quantity { get; set; }
+<<<<<<< HEAD
+        [Key]
+        public int Id { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [DisplayName("Display Order")]
+        [Range(1, 100, ErrorMessage = "Display Order must be between 1 and 100 only!!")]
+=======
+     
+        public int Id { get; set; }
+ 
+        public string Name { get; set; }
+   
+>>>>>>> 7f74f4f (.)
+        public int DisplayOrder { get; set; }
+        public DateTime CreatedDateTime { get; set; } = DateTime.Now;
     }
 }
