@@ -34,6 +34,8 @@ namespace sqlfunction
                 command.Parameters.Add("@param2", SqlDbType.VarChar, 1000).Value = data.ProductName;
                 command.Parameters.Add("@param3", SqlDbType.Int).Value = data.Quantity;
                 command.CommandType = CommandType.Text;
+                command.ExecuteNonQuery();
+
 
             }
 
