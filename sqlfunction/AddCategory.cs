@@ -46,7 +46,7 @@ namespace sqlfunction
             }
             catch(Exception ex)
             {
-                var response = "Error";
+                var response = "Error invalid input";
                 return new OkObjectResult(response);
             }
         }
