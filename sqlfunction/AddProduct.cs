@@ -26,13 +26,13 @@ namespace sqlfunction
 
             connection.Open();
 
-            string statement = "INSERT INTO Products(ProductID,ProductName,Quantity) VALUES(@param1,@param2,@param3)";
+            string statement = "INSERT INTO Products(ProductName,Quantity) VALUES(@param2,@param3)";
 
             using (SqlCommand command = new SqlCommand(statement, connection))
             {
-                command.Parameters.Add("@param1", SqlDbType.Int).Value = data.ProductID;
+                //command.Parameters.Add("@param1", SqlDbType.Int).Value = data.ProductID;
                 command.Parameters.Add("@param2", SqlDbType.VarChar, 1000).Value = data.ProductName;
-                command.Parameters.Add("@param3", SqlDbType.Decimal).Value = data.Quantity;
+                command.Parameters.Add("@param3", SqlDbType.Int).Value = data.Quantity;
                 command.CommandType = CommandType.Text;
 
             }
@@ -42,6 +42,7 @@ namespace sqlfunction
         private static SqlConnection GetConnection()
         {
             string connectionString = "Server=tcp:func1.database.windows.net,1433;Initial Catalog=func;Persist Security Info=False;User ID=subomi;Password=Theflash456;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            
             return new SqlConnection(connectionString);
         }
     }
