@@ -52,7 +52,7 @@ namespace sqlfunction
             string connectionString = "Server=tcp:func1.database.windows.net,1433;Initial Catalog=func;Persist Security Info=False;User ID=subomi;Password=Theflash456;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             return new SqlConnection(connectionString);
         }
-/*
+
         [FunctionName("GetProduct")]
         public static async Task<IActionResult> RunProduct(
             [HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequest req,
@@ -91,7 +91,7 @@ namespace sqlfunction
 
             
         }
-*/
+
     }
 
 }
