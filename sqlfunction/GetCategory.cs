@@ -47,7 +47,7 @@ namespace sqlfunction
             }
             _connection.Close();            
 
-            return new OkObjectResult(_catefory_lst);
+            return new OkObjectResult(JsonConvert.SerializeObject(_catefory_lst));
         }
 
         private static SqlConnection GetConnection()
@@ -67,7 +67,7 @@ namespace sqlfunction
 
 
 
-            string _statement = String.Format("SELECT Id,Name,DisplayOrder,CreatedDateTime from categories WHERE ProductID={0}", CategoryID);
+            string _statement = String.Format("SELECT Id,Name,DisplayOrder,CreatedDateTime from categories WHERE Id={0}", CategoryID);
 
             SqlConnection _connection = GetConnection();
 
@@ -93,7 +93,7 @@ namespace sqlfunction
             catch(Exception ex)
             {
                 var response = "No Records found";
-                return new OkObjectResult(response);
+                return new OkObjectResult(JsonConvert.SerializeObject(response));
             }
             _connection.Close();
 
