@@ -67,7 +67,7 @@ namespace sqlfunction
 
 
 
-            string _statement = String.Format("SELECT Id,Name,DisplayOrder,CreatedDateTime from categories WHERE ProductID={0}", CategoryID);
+            string _statement = String.Format("SELECT Id,Name,DisplayOrder,CreatedDateTime from categories WHERE Id={0}", CategoryID);
 
             SqlConnection _connection = GetConnection();
 
