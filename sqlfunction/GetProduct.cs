@@ -49,7 +49,7 @@ namespace sqlfunction
 
         private static SqlConnection GetConnection()
         {
-            string connectionString = "Server=tcp:func1.database.windows.net,1433;Initial Catalog=func;Persist Security Info=False;User ID=subomi;Password=Theflash456;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            string connectionString = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_SQLConnection");
             return new SqlConnection(connectionString);
         }
 
