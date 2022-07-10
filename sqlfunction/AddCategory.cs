@@ -45,7 +45,7 @@ namespace sqlfunction
 
                 }
 
-                return new OkObjectResult("Course added");
+                return new OkObjectResult("Course adfded");
             }
             catch(Exception ex)
             {
