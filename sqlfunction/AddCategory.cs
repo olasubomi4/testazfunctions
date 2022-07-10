@@ -1,5 +1,4 @@
 using System;
-using System.Data;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -29,17 +28,18 @@ namespace sqlfunction
 
             connection.Open();
 
-            string statement = "INSERT INTO categories(Name,DisplayOrder,CreatedDateTime) VALUES(@param2,@param3,@param4)";
+            string statement = "INSERT INTO categories(Name,DisplayOrder,CreatedDateTime) VALUES(data.Name,data.DisplayOrder,data.CreatedDateTime)";
 
             try
             {
                 using (MySqlCommand command = new MySqlCommand(statement, connection))
                 {
                     //command.Parameters.Add("@param1", SqlDbType.Int).Value = data.ProductID;
-                    command.Parameters.Add("@param2", SqlDbType.NVarChar, 1000).Value = data.Name;
+                    /*command.Parameters.Add("@param2", SqlDbType.NVarChar, 1000).Value = data.Name;
                     command.Parameters.Add("@param3", SqlDbType.Int,100).Value = data.DisplayOrder;
                     command.Parameters.Add("@param4", SqlDbType.DateTime2,7).Value = data.CreatedDateTime;
                     command.CommandType = CommandType.Text;
+                    */
                     command.ExecuteNonQuery();
 
 
