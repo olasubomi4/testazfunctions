@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using MySqlConnector;
+using MySqlConnection = MySql.Data.MySqlClient.MySqlConnection;
 using System.Collections.Generic;
 
 namespace sqlfunction
