@@ -52,7 +52,7 @@ namespace sqlfunction
         }
         private static SqlConnection GetConnection()
         {
-            string connectionString = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_SQLConnection");
+            string connectionString = Environment.GetEnvironmentVariable("MYSQLCONNSTR_SQLConnection");
 
             return new SqlConnection(connectionString);
         }
