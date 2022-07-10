@@ -7,8 +7,8 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using MySqlConnector;
-using MySqlConnection = MySql.Data.MySqlClient.MySqlConnection;
+using MySql.Data.MySqlClient;
+
 using System.Collections.Generic;
 
 namespace sqlfunction
@@ -74,7 +74,7 @@ namespace sqlfunction
 
             _connection.Open();
 
-            MySqlCommand _sqlcommand = new SqlCommand(_statement, _connection);
+            MySqlCommand _sqlcommand = new MySqlCommand(_statement, _connection);
             Category _category = new Category();
 
             try
