@@ -28,7 +28,7 @@ namespace sqlfunction
 
             connection.Open();
 
-            string statement = "INSERT INTO categories(Name,DisplayOrder,CreatedDateTime) VALUES(data.Name,data.DisplayOrder,data.CreatedDateTime)";
+            string statement = "INSERT INTO categories(Name,DisplayOrder) VALUES(data.Name,data.DisplayOrder)";
 
             try
             {
