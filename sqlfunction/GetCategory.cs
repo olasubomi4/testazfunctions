@@ -24,13 +24,13 @@ namespace sqlfunction
 
             string _statement = "SELECT Id,Name,DisplayOrder,CreatedDateTime from categories";
 
-            SqlConnection _connection = GetConnection();
+            MySqlConnection _connection = GetConnection();
 
             _connection.Open();
 
-            SqlCommand _sqlcommand = new SqlCommand(_statement, _connection);
+            MySqlCommand _sqlcommand = new MySqlCommand(_statement, _connection);
 
-            using (SqlDataReader _reader = _sqlcommand.ExecuteReader())
+            using (MySqlDataReader _reader = _sqlcommand.ExecuteReader())
             {
                 while (_reader.Read())
                 {
@@ -50,10 +50,10 @@ namespace sqlfunction
             return new OkObjectResult(JsonConvert.SerializeObject(_catefory_lst));
         }
 
-        private static SqlConnection GetConnection()
+        private static MySqlConnection GetConnection()
         {
             string connectionString = Environment.GetEnvironmentVariable("MYSQLCONNSTR_SQLConnection");
-            return new SqlConnection(connectionString);
+            return new MySqlConnection(connectionString);
         }
 
         [FunctionName("GetCategory")]
@@ -69,11 +69,11 @@ namespace sqlfunction
 
             string _statement = String.Format("SELECT Id,Name,DisplayOrder,CreatedDateTime from categories WHERE Id={0}", CategoryID);
 
-            SqlConnection _connection = GetConnection();
+            MySqlConnection _connection = GetConnection();
 
             _connection.Open();
 
-            SqlCommand _sqlcommand = new SqlCommand(_statement, _connection);
+            MySqlCommand _sqlcommand = new SqlCommand(_statement, _connection);
             Category _category = new Category();
 
             try
