@@ -78,7 +78,7 @@ namespace sqlfunction
 
             try
             {
-                using (SqlDataReader _reader = _sqlcommand.ExecuteReader())
+                using (MySqlDataReader _reader = _sqlcommand.ExecuteReader())
                 {
                     _reader.Read();
                     _category.Id = _reader.GetInt32(0);
