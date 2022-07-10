@@ -28,24 +28,23 @@ namespace sqlfunction
 
             connection.Open();
 
-            string statement = "INSERT INTO categories(Name,DisplayOrder) VALUES(data.Name,data.DisplayOrder)";
+            string statement = "INSERT INTO categories(Name,DisplayOrder,CreatedDateTime) VALUES(@param2,@param3,@param4)";
 
             try
             {
                 using (MySqlCommand command = new MySqlCommand(statement, connection))
                 {
                     //command.Parameters.Add("@param1", SqlDbType.Int).Value = data.ProductID;
-                    /*command.Parameters.Add("@param2", SqlDbType.NVarChar, 1000).Value = data.Name;
-                    command.Parameters.Add("@param3", SqlDbType.Int,100).Value = data.DisplayOrder;
-                    command.Parameters.Add("@param4", SqlDbType.DateTime2,7).Value = data.CreatedDateTime;
-                    command.CommandType = CommandType.Text;
-                    */
+                    command.Parameters.AddWithValue("@param2", data.Name);
+                    command.Parameters.AddWithValue("@param3", data.DisplayOrder);
+                    command.Parameters.AddWithValue("@param4", data.CreatedDateTime);
+                   // command.CommandType = CommandType.Text;
                     command.ExecuteNonQuery();
 
 
                 }
 
-                return new OkObjectResult("Course adfded");
+                return new OkObjectResult("Course added");
             }
             catch(Exception ex)
             {
