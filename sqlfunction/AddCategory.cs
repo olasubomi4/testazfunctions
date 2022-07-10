@@ -7,7 +7,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System.Data.SqlClient;
+using MySqlConnector;
 using System.Data;
 
 namespace sqlfunction
@@ -22,7 +22,7 @@ namespace sqlfunction
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             Category data = JsonConvert.DeserializeObject<Category>(requestBody);
 
-            SqlConnection connection = GetConnection();
+            MySqlConnection connection = GetConnection();
 
             connection.Open();
 
@@ -30,7 +30,7 @@ namespace sqlfunction
 
             try
             {
-                using (SqlCommand command = new SqlCommand(statement, connection))
+                using (MySqlCommand command = new MySqlCommand(statement, connection))
                 {
                     //command.Parameters.Add("@param1", SqlDbType.Int).Value = data.ProductID;
                     command.Parameters.Add("@param2", SqlDbType.NVarChar, 1000).Value = data.Name;
@@ -50,11 +50,11 @@ namespace sqlfunction
                 return new OkObjectResult(response);
             }
         }
-        private static SqlConnection GetConnection()
+        private static MySqlConnection GetConnection()
         {
             string connectionString = Environment.GetEnvironmentVariable("MYSQLCONNSTR_SQLConnection");
 
-            return new SqlConnection(connectionString);
+            return new MySqlConnection(connectionString);
         }
     }
 
